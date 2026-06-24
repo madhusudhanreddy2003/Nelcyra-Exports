@@ -1,0 +1,133 @@
+/* src/styles/Hero.module.css */
+.heroWrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8%;
+  overflow: hidden;
+  background-color: #0d2316;
+}
+
+.bgImageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease-in-out, visibility 1.2s ease-in-out;
+}
+
+.slideActive {
+  opacity: 1;
+  visibility: visible;
+}
+
+.heroBgImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 35, 22, 0.4) 0%,
+    rgba(13, 35, 22, 0.2) 50%,
+    rgba(13, 35, 22, 0.6) 100%
+  );
+  z-index: 2;
+}
+
+.contentBox {
+  position: relative;
+  z-index: 3;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.mainHeading {
+  font-family: 'EB Garamond', serif;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 1.2;
+  color: #FFFFFF;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.ctaButton {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #FFFFFF;
+  color: #0d2316;
+  transform: translateY(-2px);
+}
+
+.sliderIndicators {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 4;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dotActive {
+  background-color: #FFFFFF;
+  transform: scale(1.2);
+}
+
+@media (max-width: 992px) {
+  .mainHeading { font-size: 3rem; }
+}
+
+@media (max-width: 576px) {
+  .heroWrapper { padding: 0 24px; justify-content: center; }
+  .contentBox { align-items: center; text-align: center; }
+  .mainHeading { font-size: 2.2rem; }
+  .ctaButton { width: 100%; max-width: 260px; }
+}

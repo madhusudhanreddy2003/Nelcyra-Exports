@@ -1,0 +1,112 @@
+/* src/styles/Products.module.css */
+.productsSection {
+  background-color: var(--div-bg-secondary);
+  padding: 140px 0;
+}
+
+.sectionWrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 150px 24px;
+  background-color: var(--div-bg-primary);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 24px;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: #0D1207;
+}
+
+.filterRow { display: flex; gap: 12px; }
+
+.filterBtn {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 24px;
+  border: 1px solid #E0E0E0;
+  border-radius: 30px;
+  background-color: #FFFFFF;
+  color: #0D1207;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filterBtnActive {
+  background-color: #038B45;
+  color: #FFFFFF;
+  border-color: #038B45;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.card {
+  background-color: #FAFAF5;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.card:hover { transform: translateY(-6px); }
+
+.imageBox {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  background-color: #bdf3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+}
+
+.productImg { 
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 18px 0 0;
+
+}
+.metaContainer { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.infoRow { display: flex; justify-content: space-between; align-items: flex-start; }
+.nameBlock { display: flex; flex-direction: column; gap: 4px; }
+.productName { font-size: 1.2rem; font-weight: 700; color: #0D1207; }
+.viewMore { font-size: 0.85rem; color: #038B45; text-decoration: none; font-weight: 600; }
+.viewMore:hover { text-decoration: underline; }
+
+.addToCartBtn {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background-color: #038B45;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addToCartBtn:hover { background-color: #76CD0D; }
+.originText { font-size: 0.85rem; color: #0D1207; opacity: 0.5; }
+
+@media (max-width: 992px) { .productsGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 650px) { .sectionHeader { flex-direction: column; align-items: flex-start; gap: 20px; } .productsGrid { grid-template-columns: 1fr; } }
