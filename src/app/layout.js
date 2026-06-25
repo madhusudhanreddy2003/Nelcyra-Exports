@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from '../context/CartContext';
 import Navbar from '../components/Navbar';
+import Footer from "../components/Footer";
 
 export const metadata = {
   title: 'Nelcyra Exports',
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
         </CartProvider>
+        <Footer />
       </body>
     </html>
   );

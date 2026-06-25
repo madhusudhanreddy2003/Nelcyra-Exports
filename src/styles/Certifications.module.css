@@ -1,0 +1,119 @@
+/* src/styles/Certifications.module.css */
+
+.sectionWrapper {
+  width: 100%;
+  background-color: #ffffff; /* Premium organic light cream canvas */
+  padding: 80px 0;
+  border-top: 1px solid rgba(3, 139, 69, 0.05);
+  border-bottom: 1px solid rgba(3, 139, 69, 0.05);
+  overflow: hidden;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 24px;
+}
+
+.sectionHeader h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #0D1207;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.sectionHeader p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: #666666;
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: 0.02em;
+}
+
+/* --- The Ticker Window Frame Layer --- */
+.tickerContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  background-color: #FFFFFF;
+  padding: 30px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* Elegant architectural edge feathering masks */
+.tickerContainer::before,
+.tickerContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.tickerContainer::before {
+  left: 0;
+  background: linear-gradient(to right, #FAFAF5 0%, rgba(254, 254, 252, 0) 100%);
+}
+
+.tickerContainer::after {
+  right: 0;
+  background: linear-gradient(to left, #FAFAF5 0%, rgba(254, 254, 252, 0) 100%);
+}
+
+/* --- Endless Moving Track Layer --- */
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  gap: 80px; /* Generous separation layout boundary items */
+  padding-right: 80px;
+  animation: infiniteHorizontalScroll 30s linear infinite;
+  will-change: transform; /* Signals GPU hardware acceleration */
+}
+
+/* Pause the scrolling loop on cursor hover */
+.tickerContainer:hover .tickerTrack {
+  animation-play-state: paused;
+}
+
+.logoWrapper {
+  position: relative;
+  width: 140px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*filter: grayscale(100%) opacity(40%); /* High-end fashion editorial mute effect */
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.logoWrapper:hover {
+  /*filter: grayscale(0%) opacity(100%); /* Vibrant color reveal on user interaction */
+  transform: scale(1.05);
+}
+
+.logoImg {
+  object-fit: contain !important;
+}
+
+/* --- High Performance Keyframe Script --- */
+@keyframes infiniteHorizontalScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%); /* Moves track down to the perfect duplicated boundary mirror midpoint */
+  }
+}
+
+@media (max-width: 650px) {
+  .sectionHeader h2 { font-size: 2rem; }
+  .tickerTrack { gap: 50px; padding-right: 50px; }
+  .logoWrapper { width: 110px; height: 55px; }
+}

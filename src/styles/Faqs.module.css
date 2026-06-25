@@ -1,0 +1,236 @@
+/* src/styles/Faqs.module.css */
+
+.pageWrapper {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #0D1207;
+  overflow: hidden;
+}
+
+/* --- Premium Banner Header --- */
+.heroHeader {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.heroImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(13, 35, 22, 0.6) 0%, rgba(13, 35, 22, 0.8) 100%);
+  z-index: 2;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  padding: 0 24px;
+}
+
+.subtitleTag {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #76CD0D;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.mainTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+/* --- Main Layout Architecture --- */
+.container {
+  width: 100%;
+  max-width: 850px; /* Tighter layout width specialized for optimal text legibility */
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+.categoryGroup {
+  margin-bottom: 60px;
+}
+
+.categoryTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #0D1207;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(3, 139, 69, 0.1);
+  padding-bottom: 10px;
+}
+
+/* --- Premium Interactive Accordion Elements --- */
+.accordionItem {
+  background-color: #FAFAF5; /* Pristine organic card tint */
+  border: 1.5px solid #EAEAEA;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.accordionItem:hover {
+  border-color: #038B45;
+  box-shadow: 0 10px 25px rgba(3, 139, 69, 0.04);
+}
+
+.accordionActive {
+  border-color: #038B45;
+  background-color: #bdf3af;
+  box-shadow: 0 12px 30px rgba(3, 139, 69, 0.06);
+}
+
+.accordionTrigger {
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.questionText {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0D1207;
+  padding-right: 20px;
+  line-height: 1.4;
+}
+
+.iconWrapper {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  color: #038B45; /* Leaf Green Brand Token */
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.svgPlusIcon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Interactive Active State Modifier Rules --- */
+.accordionActive .iconWrapper {
+  background-color: #038B45; /* Inverts background colors beautifully on open */
+  border-color: #038B45;
+  color: #FFFFFF; /* Makes lines bright crisp white inside green circle */
+}
+
+.accordionActive .svgPlusIcon {
+  transform: rotate(135deg); /* Flips lines completely into a clean, geometric close indicator */
+}
+
+/* Hover over unexpanded cards enhances icon borders slightly */
+.accordionItem:hover .iconWrapper {
+  border-color: #038B45;
+}
+
+/* --- Animated Expanding Panel Body --- */
+.accordionPanel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.accordionActive .accordionPanel {
+  max-height: 500px; /* Safe padding boundary limit for smooth content slide animations */
+}
+
+.answerContent {
+  padding: 0 24px 24px 24px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #4A5043;
+  border-top: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* --- Quick Help Contact Bar --- */
+.footerSupportBox {
+  background-color: #FAFAF5;
+  border: 1px solid rgba(3, 139, 69, 0.05);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.footerSupportBox p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  color: #4A5043;
+  margin-bottom: 16px;
+}
+
+.supportLinkBtn {
+  display: inline-block;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  background-color: #038B45;
+  text-decoration: none;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: all 0.25s ease;
+}
+
+.supportLinkBtn:hover {
+  background-color: #76CD0D;
+  transform: translateY(-1px);
+}
+
+/* --- Responsive Formatting Overrides --- */
+@media (max-width: 576px) {
+  .mainTitle { font-size: 2.5rem; }
+  .categoryTitle { font-size: 1.5rem; }
+  .questionText { font-size: 0.95rem; }
+  .answerContent { font-size: 0.92rem; }
+  .accordionTrigger { padding: 20px; }
+}

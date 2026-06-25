@@ -1,0 +1,118 @@
+/* src/styles/HomeContact.module.css */
+
+.sectionWrapper {
+  position: relative;
+  width: 100%;
+  height: 45vh;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bgWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bgImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Dark atmospheric vignette filter overlay exactly like image_16c208.jpg */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(13, 18, 7, 0.75) 0%, rgba(10, 15, 6, 0.85) 100%);
+  z-index: 2;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 800px;
+}
+
+.mainTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.subTitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  color: #E2E2E2;
+  margin-bottom: 36px;
+  letter-spacing: 0.02em;
+}
+
+/* Button Arrangement System */
+.buttonGroup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.solidBtn {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #0D1207;
+  background-color: #FFFFFF;
+  padding: 16px 36px;
+  border-radius: 30px; /* Seamless pill shape from layout */
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.solidBtn:hover {
+  background-color: #76CD0D;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.ghostBtn {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  background-color: transparent;
+  padding: 15px 36px;
+  border-radius: 30px;
+  border: 1.5px solid #FFFFFF;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ghostBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Scaling rules */
+@media (max-width: 768px) {
+  .mainTitle { font-size: 2.2rem; }
+  .subTitle { font-size: 0.95rem; }
+  .buttonGroup { flex-direction: column; width: 100%; gap: 14px; }
+  .solidBtn, .ghostBtn { width: 100%; text-align: center; }
+}

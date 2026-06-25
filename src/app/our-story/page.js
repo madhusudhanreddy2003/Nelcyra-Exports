@@ -1,7 +1,9 @@
 // src/app/our-story/page.js
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../../styles/Story.module.css'; // Stepping up two levels to resolve styles cleanly
+import { Leaf, Coins, Layers, Container, Wrench } from 'lucide-react'; 
+import styles from '../../styles/Story.module.css'; 
+import ContactCTA from "../../components/ContactCTA"; 
 
 export const metadata = {
   title: 'Our Story | Nelcyra Exports',
@@ -12,11 +14,11 @@ export default function OurStoryPage() {
   return (
     <section className={styles.storyWrapper}>
       
-      {/* 1. Page Section Immersive Title Header */}
+      {/* 1. Page Title Header Banner */}
       <div className={styles.storyHeader}>
         <div className={styles.headerBg}>
           <Image
-            src="/logo/farmland.jpg" // Sourced cleanly from your verified public assets folder paths
+            src="/logo/farmland.jpg" 
             alt="Nelcyra Exports Organic Farming Origin Heritage"
             fill
             priority
@@ -31,10 +33,10 @@ export default function OurStoryPage() {
         </div>
       </div>
 
-      {/* 2. Structured Layout Container Grid */}
+      {/* 2. Structured Layout Content Container */}
       <div className={styles.innerContainer}>
         
-        {/* Genesis Symmetric Content Split Block Row */}
+        {/* Split Editorial Grid */}
         <div className={styles.splitGrid}>
           <div className={styles.leftColumn}>
             <h2>A Journey across the diverse landscapes of India.</h2>
@@ -55,7 +57,7 @@ export default function OurStoryPage() {
           </div>
         </div>
 
-        {/* 3. Mid Grid Contextual Section Graphics Grid */}
+        {/* 3. Mid Grid Graphics Context Split */}
         <div className={styles.midSectionGrid}>
           <div className={styles.storyImageFrame}>
             <Image
@@ -79,7 +81,85 @@ export default function OurStoryPage() {
           </div>
         </div>
 
-        {/* 4. Elite Highlighted Mission Statement Callout Block Box */}
+      </div>
+
+      {/* 4. Fluid Vision & Mission Section */}
+      <section className={styles.visionMissionSection}>
+        <div className={styles.visionGridContainer}>
+          
+          {/* Vision Card */}
+          <div className={styles.visionCard}>
+            <span className={styles.leafIconHeader}>
+              <Leaf size={32} />
+            </span>
+            <h2>Our Vision</h2>
+            <p>
+              To partner with farmers and customers in realising the highest possible 
+              quality produce, safe produce and services to achieve sustainability in long 
+              term growth.
+            </p>
+          </div>
+
+          {/* Mission Card */}
+          <div className={styles.missionCard}>
+            <span className={styles.leafIconHeader}>
+              <Leaf size={32} />
+            </span>
+            <h2>Our Mission</h2>
+            <p>
+              Our mission at Nelcyra Exports is to deliver premium-quality produce 
+              through sustainable practices, advanced technologies, and an unwavering 
+              commitment to food safety. By empowering farmers, fostering innovation, 
+              and safeguarding the environment, we aspire to create a healthier, 
+              greener future for all.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. Core Values 4-Column Balanced Grid */}
+      <section className={styles.valuesSection}>
+        <h2>Our Core Values</h2>
+        <div className={styles.decoratorRow}>
+          <div className={styles.lineDeco} />
+          <Leaf size={16} fill="#5ed640" color="#5ed640" />
+          <div className={styles.lineDeco} />
+        </div>
+
+        <div className={styles.valuesGrid}>
+          <div className={styles.valueCard}>
+            <div className={styles.iconSquare}>
+              <Coins size={44} strokeWidth={1.5} />
+            </div>
+            <h4>Competitive Pricing</h4>
+          </div>
+
+          <div className={styles.valueCard}>
+            <div className={styles.iconSquare}>
+              <Layers size={44} strokeWidth={1.5} />
+            </div>
+            <h4>Customized Private Labelling Solutions</h4>
+          </div>
+
+          <div className={styles.valueCard}>
+            <div className={styles.iconSquare}>
+              <Container size={44} strokeWidth={1.5} />
+            </div>
+            <h4>Qualitative Cargo Assurance</h4>
+          </div>
+
+          <div className={styles.valueCard}>
+            <div className={styles.iconSquare}>
+              <Wrench size={44} strokeWidth={1.5} />
+            </div>
+            <h4>Seamless Logistic Support</h4>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Elite Highlighted Mission Statement Callout Box
+      <div className={styles.innerContainer} style={{ paddingTop: 0 }}>
         <div className={styles.missionStatementBlock}>
           <div className={styles.statementText}>
             <h4>The Mission</h4>
@@ -95,8 +175,10 @@ export default function OurStoryPage() {
             </Link>
           </div>
         </div>
+      </div>  */}
 
-      </div>
+      {/* 7. Global Call-To-Action Banner Section */}
+      <ContactCTA />
 
     </section>
   );

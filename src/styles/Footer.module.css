@@ -1,0 +1,178 @@
+/* src/styles/Footer.module.css */
+
+.footerWrapper {
+  width: 100%;
+  background-color: #0B160F; /* Deep Luxury Charcoal-Sage Green */
+  color: #E2E8E4;
+  font-family: 'Lato', sans-serif;
+  border-top: 1px solid rgba(118, 205, 13, 0.1);
+}
+
+.mainContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px 48px 24px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 60px;
+}
+
+/* --- Left Column: Brand Manifesto --- */
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoFrame {
+  position: relative;
+  width: 160px;
+  height: 75px;
+  margin-bottom: 24px;
+}
+
+.logoImg {
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Forces your official logo clean white over the dark backdrop */
+}
+
+.brandManifesto {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #A3B1A9;
+  margin-bottom: 28px;
+  max-width: 320px;
+}
+
+/* Premium tactile minimal social arrays */
+.socialLinks {
+  display: flex;
+  gap: 14px;
+}
+
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #76CD0D;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  text-decoration: none;
+}
+
+.socialIcon:hover {
+  background-color: #038B45;
+  color: #FFFFFF;
+  border-color: #038B45;
+  transform: translateY(-2px);
+}
+
+/* --- Center Nav Columns --- */
+.columnTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.linkItem a {
+  font-size: 0.95rem;
+  color: #A3B1A9;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  display: inline-block;
+}
+
+.linkItem a:hover {
+  color: #76CD0D; /* Vibrant Green Trace Reveal */
+}
+
+/* --- Right Column: Corporate Hub HQ Address --- */
+.addressList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.addressItem {
+  display: flex;
+  align-items: start;
+  gap: 14px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #A3B1A9;
+}
+
+.addressItem a {
+  color: #A3B1A9;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.addressItem a:hover {
+  color: #76CD0D;
+}
+
+.iconWrapper {
+  color: #76CD0D;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* --- Absolute Bottom Bar --- */
+.bottomLegalBar {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 40px;
+}
+
+.legalContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #728178;
+}
+
+/* --- Responsive Media Configurations --- */
+@media (max-width: 992px) {
+  .mainContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 60px 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .mainContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 48px 16px;
+  }
+  
+  .legalContainer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 24px 16px 0 16px;
+  }
+}

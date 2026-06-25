@@ -1,0 +1,276 @@
+/* src/styles/WhyNelcyra.module.css */
+
+.pageWrapper {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #0D1207;
+  overflow: hidden;
+}
+
+/* --- Banner Header --- */
+.heroHeader {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.heroImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(13, 35, 22, 0.5) 0%, rgba(13, 35, 22, 0.7) 100%);
+  z-index: 2;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  padding: 0 24px;
+}
+
+.subtitleTag {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #76CD0D;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.mainTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+/* --- Core Layout Section --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 100px 1px;
+}
+
+/* --- Why India/Nelcyra Value Proposition Grid --- */
+.valueGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 120px;
+}
+
+.editorialText h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #0D1207;
+  margin-bottom: 24px;
+}
+
+.editorialText p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #4A5043;
+  margin-bottom: 20px;
+}
+
+/* Value Feature Cards Column */
+.cardsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.valueCard {
+  background-color: #FAFAF5;
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid rgba(3, 139, 69, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(13, 35, 22, 0.04);
+  border-color: #c2ec8b;
+}
+
+.cardIcon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.valueCard h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0D1207;
+  margin-bottom: 8px;
+}
+
+.valueCard p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #666666;
+}
+
+/* --- Process Section ("Steps We Follow") --- */
+.processSection {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 100px;
+}
+
+.processHeader {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+}
+
+.processHeader h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #0D1207;
+  margin-bottom: 16px;
+}
+
+.processHeader p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  color: #666666;
+  line-height: 1.6;
+}
+
+/* Premium Connected Process Pipeline Grid */
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.stepCard {
+  position: relative;
+  background: #ecf7e9;
+  border-radius: 24px;
+  padding: 45px 32px 35px 32px; /* Adjusted padding to embrace the typography without icons */
+  border: 1.5px solid #EAEAEA;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.stepCard:hover {
+  border-color: #038B45;
+  background: #bdf3af;
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(3, 139, 69, 0.08);
+}
+
+.stepBadge {
+  position: absolute;
+  top: -20px;
+  left: 32px;
+  background-color: #038B45;
+  color: #FFFFFF;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 10px rgba(3, 139, 69, 0.2);
+}
+
+.stepCard h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0D1207;
+  margin-bottom: 12px;
+  margin-top: 12px; /* Clean breathing room below the badge */
+}
+
+.stepCard p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555555;
+}
+/* Update these target selectors inside src/styles/WhyNelcyra.module.css */
+
+
+
+
+
+
+
+/* --- Responsive Adaptations --- */
+@media (max-width: 992px) {
+  .valueGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 650px) {
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .stepCard {
+    padding: 40px 24px 30px 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .processHeader p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  color: #666666;
+  line-height: 1.6;
+  margin-left: 15px;
+  margin-right: 15px;
+
+}
+
+  
+  .mainTitle { font-size: 2.5rem; }
+  .editorialText h2 { font-size: 2.2rem; }
+  .processHeader h2 { font-size: 2.2rem; }
+}

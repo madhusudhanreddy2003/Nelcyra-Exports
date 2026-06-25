@@ -27,7 +27,7 @@ export default function Hero() {
 
   return (
     <section className={styles.heroWrapper}>
-      
+
       <div className={styles.bgImageWrapper}>
         {bgImages.map((imagePath, index) => (
           <div 
@@ -47,7 +47,6 @@ export default function Hero() {
       </div>
 
       <div className={styles.heroOverlay} />
-
       <div className={styles.contentBox}>
         <h1 className={styles.mainHeading}>
           Sourcing India’s Finest Spices & Agricultural Produce
