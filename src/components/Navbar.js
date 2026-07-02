@@ -112,11 +112,11 @@ export default function Navbar() {
 
   // Predefined B2B Dropdown Configurations
   const qtyOptions = [
-    { value: "Under 1 Metric Ton", label: "Under 1 MT" },
-    { value: "1 to 5 Metric Tons", label: "1 - 5 MT" },
-    { value: "5 to 10 Metric Tons", label: "5 - 10 MT" },
-    { value: "10 to 20 Metric Tons", label: "10 - 20 MT" },
-    { value: "20+ Metric Tons (Full Container)", label: "20+ MT (FCL)" },
+    { value: "50  grams", label: "Under 1 MT" },
+    { value: "100 grams", label: "1 - 5 MT" },
+    { value: "250 grams", label: "5 - 10 MT" },
+    { value: "500 grams", label: "10 - 20 MT" },
+    { value: "1 Kilo-gram", label: "20+ MT (FCL)" },
     { value: "Sample Request Only", label: "Sample Order" }
   ];
 
