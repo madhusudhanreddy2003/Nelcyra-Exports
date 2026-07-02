@@ -119,7 +119,7 @@ export default function Navbar() {
     { value: "1 Kilo-gram", label: "1 Kilo-gram" },
     { value: "Sample Request Only", label: "Sample Order" }
   ];
-
+/*
   const pkgOptions = [
     { value: "Bulk Jute Bags", label: "Bulk Jute Bags" },
     { value: "50kg High-Density PP Bags", label: "50kg PP Bags" },
@@ -127,7 +127,7 @@ export default function Navbar() {
     { value: "Custom Private Labeling Packing", label: "Private Labeling" },
     { value: "Standard Wholesale Box Cartons", label: "Cardboard Cartons" }
   ];
-
+*/
   return (
     <>
       <div className={styles.announcementBar}>
@@ -213,12 +213,15 @@ export default function Navbar() {
                         placeholder="Select Quantity"
                         options={qtyOptions}
                       />
+                      {/* Input Form Context Fields 
                       <PremiumSelect 
                         value={item.packaging} 
                         onChange={(val) => updateCartItemMeta(item.id, 'packaging', val)}
                         placeholder="Select Packaging"
                         options={pkgOptions}
                       />
+                      */}
+
                     </div>
                   </div>
                 ))}
