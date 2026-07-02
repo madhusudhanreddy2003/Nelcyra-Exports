@@ -2,6 +2,7 @@
 .productsSection {
   background-color: var(--div-bg-secondary);
   padding: 140px 0;
+  padding-bottom: 300px;
 }
 
 .sectionWrapper {

@@ -11,12 +11,13 @@ export default function GalleryPage() {
 
   // Elite, highly immersive content collection catalog
   const galleryItems = [
-    { id: 1, title: "Cardamom Plantations", category: "Farms", img: "/logo/plantation.jpg", size: styles.itemTall, desc: "Direct farm-level tracking across pristine hill clusters in Kerala." },
+    { id: 7, title: "Cardamom Plantations", category: "Farms", img: "/logo/plantation.jpg", size: styles.itemTall, desc: "Direct farm-level tracking across pristine hill clusters in Kerala." },
     { id: 2, title: "Sun-Dried Whole Pepper", category: "Processing", img: "/logo/hero.png", size: styles.itemWide, desc: "Traditional slow curing locks in essential high-piperine compounds." },
     { id: 3, title: "Empowering Rural Farmers", category: "People", img: "/logo/farmer.jpg", size: styles.itemLarge, desc: "Nurturing deep generational partnerships and transparent trade networks." },
     { id: 4, title: "Sustainable Spices Harvest", category: "Farms", img: "/logo/plantation.png", size: styles.itemNormal, desc: "Ethically harvested premium spice yields packed on site." },
     { id: 5, title: "Rich Farmland Agriculture", category: "Farms", img: "/logo/farmland.jpg", size: styles.itemWide, desc: "Expansive fertile landscapes cultivation backing export supply chains." },
-    { id: 6, title: "Traditional Spice Sorting", category: "Processing", img: "/logo/village.png", size: styles.itemTall, desc: "Meticulous quality inspection routines verifying pure density metrics." }
+    { id: 6, title: "Traditional Spice Sorting", category: "Processing", img: "/logo/village.png", size: styles.itemTall, desc: "Meticulous quality inspection routines verifying pure density metrics." },
+    { id: 1, title: "Coffee Bean", category: "Farms", img: "/Gallery-Images/Nelcyra-Coffee-Beans.png", size: styles.itemNormal, desc: "Empowering local communities through sustainable agricultural practices." },
   ];
 
   const categories = ['All', 'Farms', 'Processing', 'People'];

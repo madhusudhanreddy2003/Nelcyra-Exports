@@ -102,7 +102,7 @@ export default function Navbar() {
                         `*Requested Manifest:*%0A${productManifestString}` +
                         `---%0A_Sent via Nelcyra Global Procurement Terminal_`;
 
-    const ownerPhoneNumber = "916305313849";
+    const ownerPhoneNumber = "919380904449";
     window.open(`https://wa.me/${ownerPhoneNumber}?text=${baseMessage}`, '_blank');
 
     clearCart();

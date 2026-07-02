@@ -26,7 +26,7 @@ export default function WhyNelcyraPage() {
       <div className={styles.heroHeader}>
         <div className={styles.heroBg}>
           <Image 
-            src="/logo/plantation.jpg" 
+            src="/logo/why-us.jpg" 
             alt="Nelcyra Value Chain Ecosystem Background" 
             fill 
             priority

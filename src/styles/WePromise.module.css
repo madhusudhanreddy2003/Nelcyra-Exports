@@ -187,34 +187,14 @@
   box-shadow: 0 12px 35px rgba(3, 139, 69, 0.15);
 }
 
-.sealContainer {
-  flex-shrink: 0;
-  position: relative;
-  width: 130px;
-  height: 130px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed rgba(255, 255, 255, 0.4);
-  animation: spinSlow 25s linear infinite;
-}
 
-.sealText {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.sealImage {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
 }
 
 .bannerContent {
@@ -243,10 +223,7 @@
 }
 
 /* --- Animations & Media Queries --- */
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+
 
 @media (max-width: 992px) {
   .threeColumnGrid {

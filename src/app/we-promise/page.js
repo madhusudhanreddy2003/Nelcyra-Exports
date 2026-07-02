@@ -123,8 +123,8 @@ export default function WePromisePage() {
 
           {/* 4. The Core Absolute Promise Banner Row */}
           <div className={styles.promiseBanner}>
-            <div className={styles.sealContainer}>
-              <div className={styles.sealText}>★ SAFETY ★ PURITY</div>
+            <div >
+              <img className={styles.sealImage}src="/logo/premium-quality.png" alt="★ BEST QUALITY 100 %" />
             </div>
             <div className={styles.bannerContent}>
               <h3>Our Promise</h3>

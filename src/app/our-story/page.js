@@ -18,7 +18,7 @@ export default function OurStoryPage() {
       <div className={styles.storyHeader}>
         <div className={styles.headerBg}>
           <Image
-            src="/logo/farmland.jpg" 
+            src="/logo/our-story-2.jpg" 
             alt="Nelcyra Exports Organic Farming Origin Heritage"
             fill
             priority

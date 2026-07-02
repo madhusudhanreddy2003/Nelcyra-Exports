@@ -12,6 +12,8 @@ export default function Certifications() {
     { id: 'iso', name: 'ISO 22000 Certified', img: '/logo/iso.png' },
     { id: 'SBI', name: 'SBI Certified', img: '/logo/Spices_Board_of_India.png' },
     { id: 'MSME', name: 'MSME Certified', img: '/logo/MSME.png' },
+    { id: 'make-in-india', name: 'Make in India Certified', img: '/logo/lion.png' },
+
 
   ];
 

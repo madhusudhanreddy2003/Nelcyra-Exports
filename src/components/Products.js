@@ -17,7 +17,7 @@ export default function Products() {
     { id: 'sp2', name: 'Black Pepper', category: 'Spices', origin: 'Grown in Kerala, IND', img: '/products/black-pepper.jpg' },
     { id: 'sp3', name: 'Clove', category: 'Spices', origin: 'Grown in Tamil Nadu, IND', img: '/products/Cloves.jpg' },
     { id: 'sp4', name: 'Chillies', category: 'Spices', origin: 'Grown in Andhra Pradesh, IND', img: '/products/chilli.jpg' },
-    { id: 'sp5', name: 'Turmeric', category: 'Spices', origin: 'Grown in Nizamabad, IND', img: '/products/turmeric.jpg' },
+    { id: 'sp5', name: 'Turmeric', category: 'Spices', origin: 'Grown in Nizamabad, IND', img: '/products/turmeric-2.jpg' },
     { id: 'ag1', name: 'Banana', category: 'Agri Products', origin: 'Grown in Gujarat, IND', img: '/products/banana-3.jpg' },
     { id: 'ag2', name: 'Coconut', category: 'Agri Products', origin: 'Grown in Karnataka, IND', img: '/products/coconut.jpg' },
     { id: 'ag3', name: 'Coffee Bean', category: 'Agri Products', origin: 'Grown in Wayanad, IND', img: '/products/coffee.jpg' },

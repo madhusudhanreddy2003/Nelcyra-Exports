@@ -1,4 +1,5 @@
 // src/app/contact-us/page.js
+
 'use client';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { useState } from 'react';
@@ -77,7 +78,7 @@ export default function ContactUsPage() {
       <div className={styles.heroHeader}>
         <div className={styles.heroBg}>
           <Image 
-            src="/logo/plantation.png" 
+            src="/logo/contact.jpg" 
             alt="Nelcyra International Trading Hub Header" 
             fill 
             priority 
