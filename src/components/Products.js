@@ -86,6 +86,10 @@ export default function Products() {
                 >
                   Add to Cart
                 </button>
+                <button className={styles.addToCartBtn}>
+                  Buy Now
+
+                </button>
               </div>
               <span className={styles.originText}>{product.origin}</span>
             </div>

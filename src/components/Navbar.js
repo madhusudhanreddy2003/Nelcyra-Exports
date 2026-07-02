@@ -81,7 +81,7 @@ export default function Navbar() {
     clientDetails.phone.trim() !== '' &&
     clientDetails.city.trim() !== '' &&
     cartItems.length > 0 &&
-    cartItems.every(item => (item.quantity || '').trim() !== '' && (item.packaging || '').trim() !== '');
+    cartItems.every(item => (item.quantity || '').trim() !== '');
 
   const handleSendEnquiry = () => {
     if (!isFormValid) return;
@@ -89,8 +89,7 @@ export default function Navbar() {
     let productManifestString = '';
     cartItems.forEach((item) => {
       productManifestString += `*${item.name}* (${item.category})%0A` +
-                               `• Quantity: ${item.quantity}%0A` +
-                               `• Packaging: ${item.packaging}%0A%0A`;
+                               `• Quantity: ${item.quantity}%0A`;
     });
 
     const baseMessage = `📦 *NEW B2B TRADE ENQUIRY - NELCYRA EXPORTS*%0A%0A` +

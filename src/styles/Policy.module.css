@@ -12,7 +12,6 @@
   width: 100%;
   background-image: url("/logo/our-solution-img3.png");
   background-size: cover;
-
   padding: 100px 24px;       /* Drop 100vh and use deliberate padding for crisp vertical layout */
   display: flex;
   flex-direction: column;    /* Forces title on top, paragraph directly underneath */
