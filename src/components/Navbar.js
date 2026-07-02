@@ -241,6 +241,13 @@ export default function Navbar() {
                 >
                   Send RFQ via WhatsApp
                 </button>
+                {/* Place this snippet right above your final "Submit Enquiry" checkout button component */}
+<p style={{ fontSize: '0.8rem', color: '#728178', textAlign: 'center', margin: '12px 0', fontFamily: 'Lato, sans-serif' }}>
+  By submitting this procurement request, you acknowledge our{' '}
+  <Link href="/shipping-return-policy" target="_blank" style={{ color: '#038B45', textDecoration: 'underline', fontWeight: '500' }}>
+    Shipping, Return & Refund Policy
+  </Link>.
+</p>
               </div>
             </div>
           )}

@@ -1,0 +1,221 @@
+/* src/styles/Policy.module.css */
+
+.policyWrapper {
+  width: 100%;
+  background-color: #FAFAF5; /* Premium soft linen canvas */
+  color: #0D1207;
+  font-family: 'Lato', sans-serif;
+}
+
+/* --- 1. Fixed Premium Header Banner --- */
+.policyHeader {
+  width: 100%;
+  background-image: url("/logo/our-solution-img3.png");
+  background-size: cover;
+
+  padding: 100px 24px;       /* Drop 100vh and use deliberate padding for crisp vertical layout */
+  display: flex;
+  flex-direction: column;    /* Forces title on top, paragraph directly underneath */
+  align-items: center;       /* Centers horizontally */
+  justify-content: center;   /* Centers vertically */
+  text-align: center;
+  height: 100vh;
+}
+
+.policyHeader h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;        /* Removed transform hacks entirely, using natural layout margins */
+}
+
+.policyHeader p {
+  font-size: 1.05rem;
+  color: #A3B1A9;
+  max-width: 600px;          /* Brought down to an elegant readable width line limit */
+  margin: 0 auto;
+  line-height: 1.6;          /* Clean typography breathing space */
+}
+
+/* --- 2. Structural Main Layout Grid --- */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 24px 120px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.sectionBlock {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid rgba(3, 139, 69, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.01);
+}
+
+.introSection {
+  background-color: #cef1c8; /* Soft linen canvas for intro section */
+  padding: 60px 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid rgba(13, 18, 7, 0.08);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.sectionHeader h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #12331F;
+}
+
+.iconColor {
+  color: #038B45; /* Clean brand green vector paths */
+  flex-shrink: 0;
+}
+
+/* --- 3. Inner Typography Elements --- */
+.introText {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #4A5043;
+  margin-bottom: 16px;
+}
+
+.policyParagraph {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4A5043;
+  margin-bottom: 20px;
+}
+
+.innerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.dataCard {
+  background-color: #FAFAF5;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 3px solid #76CD0D;
+}
+
+.dataCard h4 {
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: #12331F;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.dataCard p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4A5043;
+  margin: 0;
+}
+
+/* Clean Custom Minimal Lists */
+.policyList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.listItem {
+  position: relative;
+  padding-left: 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4A5043;
+}
+
+.listItem::before {
+  content: "•";
+  position: absolute;
+  left: 8px;
+  color: #038B45;
+  font-weight: bold;
+}
+
+/* Callout Box Accent style */
+.calloutBox {
+  background-color: #FFFDF9; /* Warm ivory highlight */
+  border: 1px dashed rgba(74, 46, 27, 0.2);
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.calloutBox h4 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  color: #4A2E1B;
+  margin-bottom: 8px;
+}
+
+/* --- 4. Contact Block styling --- */
+.contactCardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.contactInfoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  color: #4A5043;
+}
+
+.contactInfoRow a {
+  color: #038B45;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* --- Responsive Configurations --- */
+@media (max-width: 768px) {
+  .sectionBlock {
+    padding: 24px;
+  }
+  
+  .policyHeader {
+    padding: 60px 16px;     /* Tighter padding constraints for small devices */
+  }
+
+  .policyHeader h1 {
+    font-size: 2.2rem;       /* Clean font step-down scale down */
+    margin-bottom: 12px;
+  }
+  
+  .policyHeader p {
+    font-size: 0.95rem;
+  }
+  
+  .contactCardGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

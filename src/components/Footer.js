@@ -76,6 +76,7 @@ export default function Footer() {
             <li className={styles.linkItem}><Link href="/faqs">FAQ's</Link></li>
             <li className={styles.linkItem}><Link href="/gallery">Gallery</Link></li>
             <li className={styles.linkItem}><Link href="/contact-us">Contact Us</Link></li>
+            <li className={styles.linkItem}><Link href="/shipping-return-policy">Shipping & Return Policy</Link></li>
           </ul>
         </div>
 
@@ -95,6 +96,7 @@ export default function Footer() {
               <Mail size={18} strokeWidth={1.5} className={styles.iconWrapper} />
               <a href="mailto:sales@nelcyraexports.com">sales@nelcyraexports.com</a>
             </div>
+            
           </div>
         </div>
 
