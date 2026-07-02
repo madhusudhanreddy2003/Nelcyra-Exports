@@ -112,11 +112,11 @@ export default function Navbar() {
 
   // Predefined B2B Dropdown Configurations
   const qtyOptions = [
-    { value: "50  grams", label: "Under 1 MT" },
-    { value: "100 grams", label: "1 - 5 MT" },
-    { value: "250 grams", label: "5 - 10 MT" },
-    { value: "500 grams", label: "10 - 20 MT" },
-    { value: "1 Kilo-gram", label: "20+ MT (FCL)" },
+    { value: "50  grams", label: "50  grams" },
+    { value: "100 grams", label: "100 grams" },
+    { value: "250 grams", label: "250 grams" },
+    { value: "500 grams", label: "500 grams" },
+    { value: "1 Kilo-gram", label: "1 Kilo-gram" },
     { value: "Sample Request Only", label: "Sample Order" }
   ];
 
