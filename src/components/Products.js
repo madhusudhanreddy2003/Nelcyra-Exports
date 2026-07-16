@@ -47,7 +47,7 @@ export default function Products() {
     <section id="products" className={styles.sectionWrapper}>
       
       <div className={styles.sectionHeader}>
-        <h2 className={styles.title}>Our Commodities</h2>
+        <h2 className={styles.title}>Our Products</h2>
         <div className={styles.filterRow}>
           {['All', 'Agri Products', 'Spices'].map((category) => (
             <button
