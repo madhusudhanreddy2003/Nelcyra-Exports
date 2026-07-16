@@ -1,0 +1,162 @@
+/* src/styles/Shipping.module.css */
+
+.pageWrapper {
+  width: 100%;
+  background-color: #bae981; /* Premium soft linen canvas */
+  min-height: 100vh;
+  padding: 160px 24px 100px 24px;
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  max-width: 650px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid rgba(18, 51, 31, 0.05);
+  box-shadow: 0 20px 50px rgba(18, 51, 31, 0.03);
+}
+
+/* Header Context */
+.headerBlock {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.headerBlock h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.4rem;
+  color: #12331F;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.headerBlock p {
+  font-size: 0.95rem;
+  color: #728178;
+}
+
+/* Luxury Form Grid Structures */
+.formStructure {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  
+  letter-spacing: 0.05em;
+  color: #12331F;
+}
+
+.inputFieldWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  color: #728178;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.inputStructure {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 1px solid #E2E8E4;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #0D1207;
+  background-color: #FAFAF5;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.inputStructure:focus {
+  outline: none;
+  border-color: #038B45;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(3, 139, 69, 0.1);
+}
+
+/* Focus state shifting icon color */
+.inputStructure:focus + .inputIcon {
+  color: #038B45;
+}
+
+/* Compact Split Row for Layout City / Zip Code */
+.splitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Premium Checkout Execution Button */
+.placeOrderBtn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 16px;
+  background-color: #12331F;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.placeOrderBtn:not(:disabled):hover {
+  background-color: #038B45;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(3, 139, 69, 0.15);
+}
+
+.placeOrderBtn:disabled {
+  background-color: #E2E8E4;
+  color: #A3B1A9;
+  cursor: not-allowed;
+}
+
+/* Policy Legal Accent Text Anchor */
+.policyDisclaimer {
+  font-size: 0.8rem;
+  color: #728178;
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.policyDisclaimer a {
+  color: #038B45;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Responsiveness overrides */
+@media (max-width: 768px) {
+  .container {
+    padding: 32px 20px;
+  }
+  .splitRow {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

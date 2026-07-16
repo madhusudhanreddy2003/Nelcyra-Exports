@@ -1,14 +1,16 @@
 // src/components/Products.js
-
 'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
+import { Plus } from 'lucide-react'; // Premium minimal icon path
 import styles from '../styles/Products.module.css';
 
 export default function Products() {
+  const router = useRouter();
   const { addToCart, setCartOpen } = useCart();
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -29,11 +31,23 @@ export default function Products() {
     ? productData 
     : productData.filter(item => item.category === activeCategory);
 
+  // Handles immediate redirect pipeline for bulk orders
+  const handleBuyNow = (product) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      quantity: '', 
+      img: product.img
+    });
+    router.push('/shipping-details'); // Smooth programmatic route change
+  };
+
   return (
     <section id="products" className={styles.sectionWrapper}>
       
       <div className={styles.sectionHeader}>
-        <h2 className={styles.title}>Products</h2>
+        <h2 className={styles.title}>Our Commodities</h2>
         <div className={styles.filterRow}>
           {['All', 'Agri Products', 'Spices'].map((category) => (
             <button
@@ -51,45 +65,56 @@ export default function Products() {
         {filteredProducts.map((product) => (
           <div key={product.id} className={styles.card}>
             
-            <div className={styles.imageBox}>
-              <Image 
-                src={product.img} 
-                alt={product.name} 
-                width={220} 
-                height={220} 
-                className={styles.productImg}
-              />
-            </div>
+          <div className={styles.imageBox}>
+            <Image 
+              src={product.img} 
+              alt={product.name} 
+              fill /* Forces image to scale completely out to the container limits */
+              className={styles.productImg}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={product.id === 'sp1' || product.id === 'sp2'}
+            />
+          </div>
+
+          
 
             <div className={styles.metaContainer}>
               <div className={styles.infoRow}>
                 <div className={styles.nameBlock}>
                   <span className={styles.productName}>{product.name}</span>
                   <Link href={`/products/${product.id}`} className={styles.viewMore}>
-                    view more details
+                    view details
                   </Link>
                 </div>
                 
-                <button 
-                  className={styles.addToCartBtn}
-                  onClick={() => {
-                    addToCart({
-                      id: product.id,
-                      name: product.name,
-                      category: product.category,
-                      quantity: '', 
-                      packaging: '', 
-                      img: product.img
-                    });
-                    setCartOpen(true);
-                  }}
-                >
-                  Add to Cart
-                </button>
-                <button className={styles.addToCartBtn}>
-                  Buy Now
+                {/* Premium Layout Actions Flex */}
+                <div className={styles.actionCluster}>
+                  {/* Plus Icon Action Button for Quick Addition */}
+                  <button 
+                    className={styles.iconAddBtn}
+                    title="Add to Cart"
+                    onClick={() => {
+                      addToCart({
+                        id: product.id,
+                        name: product.name,
+                        category: product.category,
+                        quantity: '',
+                        img: product.img
+                      });
+                      setCartOpen(true);
+                    }}
+                  >
+                    <Plus size={18} strokeWidth={2} />
+                  </button>
 
-                </button>
+                  {/* High-Tier Buy Now Action */}
+                  <button 
+                    className={styles.buyNowBtn}
+                    onClick={() => handleBuyNow(product)}
+                  >
+                    Buy Now
+                  </button>
+                </div>
               </div>
               <span className={styles.originText}>{product.origin}</span>
             </div>
