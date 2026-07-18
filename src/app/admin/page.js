@@ -1,7 +1,7 @@
 // src/app/admin/page.js
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import { db, storage } from '../../lib/firebase'; 
 import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
@@ -23,7 +23,9 @@ import {
   Anchor,
   Edit2,
   Check,
-  Upload
+  Upload,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import styles from '../../styles/Admin.module.css';
 
@@ -53,6 +55,9 @@ export default function AdminDashboard() {
     globalQuantity: '',
     status: 'NEW'
   });
+
+  // --- SHIPMENT INTERACTIVE SUB-GRID STATE ---
+  const [expandedOrderId, setExpandedOrderId] = useState(null);
 
   // --- SECURITY LAYER ---
   useEffect(() => {
@@ -187,6 +192,24 @@ export default function AdminDashboard() {
     }
   };
 
+  // --- LIVE INTERACTIVE SUB-GRID MILESTONE TOGGLE ARCHITECTURE ---
+  const handleTogglePipelineStep = async (orderId, currentPipeline, stepId) => {
+    const updatedPipeline = currentPipeline.map(step => {
+      if (step.id === stepId) {
+        return { ...step, checked: !step.checked };
+      }
+      return step;
+    });
+
+    try {
+      await updateDoc(doc(db, 'orders', orderId), {
+        pipeline: updatedPipeline
+      });
+    } catch (err) {
+      console.error("Failed toggling logistics milestone checkpoint phase:", err);
+    }
+  };
+
   // --- INLINE EDIT ARCHITECTURE ACTIONS ---
   const startEditingProduct = (product) => {
     setEditingProductId(product.id);
@@ -247,6 +270,7 @@ export default function AdminDashboard() {
     setActiveTab(tabName);
     setMenuOpen(false);
     setSearchQuery('');
+    setExpandedOrderId(null); // Reset detail views when toggling contexts
   };
 
   const handleSignOut = () => {
@@ -291,6 +315,7 @@ export default function AdminDashboard() {
           </button>
         </nav>
 
+        {/* Dynamic click handler added here */}
         <button className={styles.newExportBtn} onClick={() => setIsModalOpen(true)}>
           <Plus size={16} /> New Export
         </button>
@@ -464,6 +489,7 @@ export default function AdminDashboard() {
                     </strong>
                   </p>
                 </div>
+                {/* Switch handler to match modal deploy logic */}
                 <button className={styles.newExportBtn} onClick={() => setIsModalOpen(true)} style={{ marginTop: 0, width: 'auto', padding: '10px 16px' }}>
                   <Package size={16} /> Add Product
                 </button>
@@ -648,7 +674,7 @@ export default function AdminDashboard() {
           </>
         )}
 
-        {/* VIEW 4: FREIGHT SHIPMENTS LEDGER SYSTEM */}
+        {/* VIEW 4: FREIGHT SHIPMENTS LEDGER SYSTEM (INTEGRATED INLINE PROGRESS EDITOR) */}
         {activeTab === 'shipments' && (
           <>
             <div className={styles.topActionBar}>
@@ -664,6 +690,7 @@ export default function AdminDashboard() {
                 <table className={styles.flatTable}>
                   <thead>
                     <tr>
+                      <th style={{ width: '40px' }}></th>
                       <th>Tracking Code</th>
                       <th>Consignee</th>
                       <th>Destination</th>
@@ -673,22 +700,102 @@ export default function AdminDashboard() {
                   <tbody>
                     {filteredOrders.map(order => {
                       const percentage = calculateProgress(order.pipeline);
+                      const isExpanded = expandedOrderId === order.id;
+
                       return (
-                        <tr key={order.id}>
-                          <td style={{ fontFamily: 'monospace' }}>{order.id.slice(0, 8).toUpperCase()}...</td>
-                          <td style={{ fontWeight: '600' }}>{order.customerName || 'Direct Logistics'}</td>
-                          <td>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Anchor size={14} />{order.city || 'Sea Port'}</div>
-                          </td>
-                          <td>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: '180px' }}>
-                              <div className={styles.sliderContainer} style={{ flex: 1, margin: 0 }}>
-                                <div className={styles.sliderFill} style={{ width: `${percentage}%` }}></div>
+                        <Fragment key={order.id}>
+                          {/* Main Row Layer */}
+                          <tr 
+                            onClick={() => setExpandedOrderId(isExpanded ? null : order.id)}
+                            style={{ cursor: 'pointer', transition: 'background-color 0.2s' }}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fafbfa'}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                          >
+                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
+                              {isExpanded ? <ChevronUp size={16} style={{ color: '#617568' }} /> : <ChevronDown size={16} style={{ color: '#617568' }} />}
+                            </td>
+                            <td style={{ fontFamily: 'monospace' }}>{order.id.slice(0, 8).toUpperCase()}...</td>
+                            <td style={{ fontWeight: '600', color: '#062313' }}>{order.customerName || 'Direct Logistics'}</td>
+                            <td>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#062313' }}><Anchor size={14} />{order.city || 'Sea Port'}</div>
+                            </td>
+                            <td>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: '180px' }}>
+                                <div className={styles.sliderContainer} style={{ flex: 1, margin: 0, height: '6px', backgroundColor: '#e2e6e4', borderRadius: '100px', overflow: 'hidden', position: 'relative' }}>
+                                  <div className={styles.sliderFill} style={{ width: `${percentage}%`, height: '100%', backgroundColor: '#038B45', transition: 'width 0.4s ease' }}></div>
+                                </div>
+                                <span style={{ fontWeight: '700', fontSize: '0.9rem', color: '#062313', width: '40px', textAlign: 'right' }}>{percentage}%</span>
                               </div>
-                              <span style={{ fontWeight: '700' }}>{percentage}%</span>
-                            </div>
-                          </td>
-                        </tr>
+                            </td>
+                          </tr>
+
+                          {/* Expanded Step Milestone Checklist Sub-Grid */}
+                          {isExpanded && (
+                            <tr>
+                              <td colSpan="5" style={{ padding: '0 24px 24px 24px', backgroundColor: '#fafbfa' }}>
+                                <div style={{
+                                  backgroundColor: '#ffffff',
+                                  border: '1px solid #e2e6e4',
+                                  borderRadius: '12px',
+                                  padding: '20px 24px',
+                                  boxShadow: 'inset 0 2px 4px rgba(6, 35, 19, 0.02)',
+                                  marginTop: '4px'
+                                }}>
+                                  <h4 style={{ margin: '0 0 16px 0', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', color: '#617568', letterSpacing: '0.05em' }}>
+                                    Logistics Pipeline Route Execution
+                                  </h4>
+                                  
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+                                    {(order.pipeline || []).map((step) => (
+                                      <div 
+                                        key={step.id}
+                                        onClick={(e) => {
+                                          e.stopPropagation(); // Stops parent row contraction
+                                          handleTogglePipelineStep(order.id, order.pipeline, step.id);
+                                        }}
+                                        style={{
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          gap: '12px',
+                                          padding: '12px 16px',
+                                          borderRadius: '8px',
+                                          border: '1px solid',
+                                          borderColor: step.checked ? '#d0e8dc' : '#e2e6e4',
+                                          backgroundColor: step.checked ? '#f4faf7' : '#ffffff',
+                                          cursor: 'pointer',
+                                          userSelect: 'none',
+                                          transition: 'all 0.2s ease'
+                                        }}
+                                      >
+                                        <div style={{
+                                          width: '20px',
+                                          height: '20px',
+                                          borderRadius: '4px',
+                                          border: '2px solid',
+                                          borderColor: step.checked ? '#038B45' : '#acb7b0',
+                                          backgroundColor: step.checked ? '#038B45' : 'transparent',
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          justifyContent: 'center',
+                                          transition: 'all 0.15s ease'
+                                        }}>
+                                          {step.checked && <Check size={14} strokeWidth={3} style={{ color: '#ffffff' }} />}
+                                        </div>
+                                        <span style={{ 
+                                          fontSize: '0.85rem', 
+                                          fontWeight: step.checked ? '600' : '500', 
+                                          color: step.checked ? '#062313' : '#617568' 
+                                        }}>
+                                          {step.label}
+                                        </span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          )}
+                        </Fragment>
                       );
                     })}
                   </tbody>
@@ -871,7 +978,7 @@ export default function AdminDashboard() {
                     whiteSpace: 'nowrap',
                     padding: '12px 28px', 
                     opacity: isSubmitting ? 0.7 : 1,
-                    backgroundColor: '#062313', 
+                    backgroundColor: '#416c54', 
                     color: '#ffffff', 
                     borderRadius: '100px',
                     border: 'none',
