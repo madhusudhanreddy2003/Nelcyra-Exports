@@ -1,8 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from '../context/CartContext';
-import Navbar from '../components/Navbar';
-import Footer from "../components/Footer";
+import LayoutShell from '../components/LayoutShell';
 
 export const metadata = {
   title: 'Nelcyra Exports',
@@ -24,12 +23,10 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <CartProvider>
-          <Navbar />
-          <main style={{ minHeight: "100vh" }}>
+          <LayoutShell>
             {children}
-          </main>
+          </LayoutShell>
         </CartProvider>
-        <Footer />
       </body>
     </html>
   );

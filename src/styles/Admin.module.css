@@ -1,0 +1,638 @@
+/* ==========================================================================
+   🌐 RESET & CORE ENGINE LAYOUT
+   ========================================================================== */
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #F8FAF9;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #112217;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* 💻 Persistent Left Navigation Bar (Desktop Standard Mode) */
+.sidebar {
+  width: 280px;
+  background: #EAEFEF;
+  border-right: 1px solid #DFE5E4;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 📱 High-Fidelity Mobile Sticky Header (Hidden on Desktops) */
+.mobileNavBar {
+  display: none;
+  width: 100%;
+  height: 64px;
+  background: #EAEFEF;
+  border-bottom: 1px solid #DFE5E4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0 24px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 110;
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.menuToggleBtn {
+  background: #FFFFFF;
+  border: 1px solid #DFE5E4;
+  border-radius: 8px;
+  color: #062313;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.menuToggleBtn:hover {
+  background: #F4F6F5;
+}
+
+.logoBlock {
+  margin-bottom: 36px;
+}
+
+.logoBlock h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #062313;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.logoBlock span {
+  font-size: 0.72rem;
+  color: #516457;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.navBtn, .activeNavBtn {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4A5E51;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navBtn:hover {
+  background: rgba(6, 35, 19, 0.04);
+  color: #062313;
+  transform: translateX(2px);
+}
+
+.activeNavBtn {
+  color: #062313;
+  background: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(6, 35, 19, 0.03), 0 1px 2px rgba(6, 35, 19, 0.02);
+}
+
+.newExportBtn {
+  margin-top: auto;
+  margin-bottom: 24px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #062313;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.newExportBtn:hover {
+  background: #0b3d22;
+  box-shadow: 0 4px 12px rgba(6, 35, 19, 0.15);
+}
+
+.adminProfileCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid #DFE5E4;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease;
+}
+
+.adminProfileCard:hover {
+  opacity: 0.85;
+}
+
+.profileAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #062313;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.profileInfo h4 {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #062313;
+}
+
+.profileInfo p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #617568;
+}
+
+/* 🖥️ MAIN WORKSPACE CONTAINER ENGINE */
+.workspace {
+  flex: 1;
+  margin-left: 280px;
+  padding: 44px 48px;
+  min-height: 100vh;
+  width: calc(100% - 280px);
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topActionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.topActionBar h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #062313;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.searchWrapper {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7A8F82;
+  transition: color 0.2s ease;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  border: 1px solid #DFE5E4;
+  border-radius: 24px;
+  font-size: 0.92rem;
+  background: #FFFFFF;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  border-color: #062313;
+  box-shadow: 0 4px 12px rgba(6, 35, 19, 0.05);
+}
+
+.searchInput:focus + .searchIcon {
+  color: #062313;
+}
+
+/* ==========================================================================
+   📈 METRICS DISPLAY GRID SYSTEM
+   ========================================================================== */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.metricCard {
+  background: #FFFFFF;
+  border: 1px solid #EBEFEF;
+  border-radius: 16px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01), 0 1px 3px rgba(0, 0, 0, 0.01);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(6, 35, 19, 0.04);
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #617568;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.metricValue {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #062313;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.metricSubtext {
+  font-size: 0.78rem;
+  color: #038B45;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   ⚡ ASYMMETRIC OPERATIONAL LAYOUT & CARDS
+   ========================================================================== */
+.layoutSplit {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 32px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.flatContainerCard {
+  background: #FFFFFF;
+  border: 1px solid #EBEFEF;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Guards card borders from expanding wide layout children */
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.cardTop h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #062313;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.viewAllLink {
+  font-size: 0.88rem;
+  color: #038B45;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease;
+}
+
+.viewAllLink:hover {
+  gap: 8px;
+}
+
+/* ==========================================================================
+   📋 DATA LEDGER ENQUIRIES TABLE SYSTEM
+   ========================================================================== */
+.tableResponsiveWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+}
+
+.flatTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.flatTable th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #617568;
+  border-bottom: 2px solid #F0F4F2;
+  letter-spacing: 0.03em;
+}
+
+.flatTable tr {
+  transition: background-color 0.15s ease;
+}
+
+.flatTable tbody tr:hover {
+  background-color: #F8FAF9;
+}
+
+.flatTable td {
+  padding: 18px;
+  font-size: 0.92rem;
+  color: #2E3F35;
+  border-bottom: 1px solid #F0F4F2;
+}
+
+/* Workflow Badges */
+.badgeFlat {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: inline-block;
+}
+
+.new { background: #E8F5EE; color: #08703B; }
+.inprogress { background: #EAF3FA; color: #16609C; }
+.pending { background: #FFF9E6; color: #9C7616; }
+.highpriority { background: #FDECEB; color: #9C2216; }
+
+/* ==========================================================================
+   🚚 LIVE PROGRESS SHIPMENT SCROLL TILES
+   ========================================================================== */
+.shipmentsScrollWrapper {
+  width: 100%;
+}
+
+.shipmentsFlexContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.shipmentItemCard {
+  background: #F8FAF9;
+  border: 1px solid #EBEFEF;
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease;
+}
+
+.shipmentItemCard:hover {
+  transform: scale(1.01);
+}
+
+.shipmentHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.sliderContainer {
+  height: 8px;
+  background: #E2E8E6;
+  border-radius: 4px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.sliderFill {
+  height: 100%;
+  background: linear-gradient(90deg, #062313, #0b4a27);
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sliderMetrics {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #617568;
+  font-weight: 500;
+}
+
+/* Mobile Sidebar Drawer Shade Mask */
+.sidebarOverlay {
+  display: none;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100vw; 
+  height: 100vh;
+  background: rgba(6, 35, 19, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 95;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+/* ==========================================================================
+   ⚡ TARGETED SCREEN RESOLUTION RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .workspace {
+    padding: 40px 32px;
+  }
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .layoutSplit {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobileNavBar {
+    display: flex;
+  }
+
+  /* Structural side pane modifications for mobile slide-out drawer */
+  .sidebar {
+    transform: translateX(-100%);
+    top: 64px;
+    height: calc(100vh - 64px);
+    width: 290px;
+    background: #EAEFEF;
+    padding: 28px 24px;
+    box-shadow: 12px 0 30px rgba(6, 35, 19, 0.08);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0) !important;
+  }
+
+  .sidebarOverlayVisible {
+    display: block;
+  }
+
+  .logoBlock {
+    display: none;
+  }
+
+  .newExportBtn {
+    margin-top: 32px;
+  }
+
+  /* 🚨 HARD FIX: Global page bleed protection */
+  .workspace {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 88px 16px 40px 16px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden; /* Absolute shield pinning view content inside view frame */
+  }
+
+  .topActionBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .searchWrapper {
+    width: 100%;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* 🚨 HARD FIX: Complete inner bounding constraints */
+  .layoutSplit {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .flatContainerCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 16px !important;
+    box-sizing: border-box !important;
+    overflow: hidden; /* Locks children from pushing container boundaries outward */
+  }
+
+  /* 📋 Enforces Touch-Swipe Horizontal Axis to Table Rows */
+  .tableResponsiveWrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+  }
+
+  .flatTable {
+    min-width: 650px !important; /* Preserves desktop-proportioned layout logic, generating clean swipe zone */
+  }
+
+  /* 🚚 Transforms Live Progress Blocks into Horizontal Ribbon Track */
+  .shipmentsScrollWrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+    display: block;
+  }
+
+  .shipmentsFlexContainer {
+    display: flex !important;
+    flex-direction: row !important; /* Locks structural row path alignment side-by-side */
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    gap: 14px;
+  }
+
+  .shipmentItemCard {
+    width: 280px !important; /* Fixes block structures uniformly inside row array loops */
+    flex-shrink: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .workspace {
+    padding: 88px 12px 32px 12px !important;
+  }
+}

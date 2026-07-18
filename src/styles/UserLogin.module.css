@@ -1,0 +1,186 @@
+/* src/styles/UserLogin.module.css */
+
+.pageWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F0F3F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: 'Lato', sans-serif;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 440px;
+  background: #F0F3F1;
+  border-radius: 30px;
+  padding: 48px 40px;
+  box-shadow: 9px 9px 18px #d1d5d2, 
+             -9px -9px 18px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Header Context */
+.headerBlock {
+  text-align: center;
+}
+
+.brandTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.2rem;
+  color: #12331F;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.brandSubtitle {
+  font-size: 0.85rem;
+  color: #728178;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Forms & Inset Fields */
+.formStructure {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputGroup label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #12331F;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-left: 4px;
+}
+
+.inputFieldWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 18px;
+  color: #728178;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.inputStructure {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1rem;
+  color: #12331F;
+  background: #F0F3F1;
+  box-shadow: inset 3px 3px 6px #d1d5d2, 
+              inset -3px -3px 6px #ffffff;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+}
+
+.inputStructure:focus {
+  box-shadow: inset 1px 1px 2px #d1d5d2, 
+              inset -1px -1px 2px #ffffff;
+}
+
+.inputStructure:focus + .inputIcon {
+  color: #038B45;
+}
+
+/* OTP Code Design */
+.otpGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.otpInput {
+  width: 100%;
+  letter-spacing: 0.4em;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #038B45;
+  padding: 16px;
+}
+
+/* Controls */
+.actionBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #F0F3F1;
+  color: #12331F;
+  box-shadow: 4px 4px 8px #d1d5d2, 
+             -4px -4px 8px #ffffff;
+  transition: all 0.2s ease;
+}
+
+.actionBtn:hover:not(:disabled) {
+  color: #038B45;
+  box-shadow: 2px 2px 4px #d1d5d2, 
+             -2px -2px 4px #ffffff;
+  transform: translateY(1px);
+}
+
+.actionBtn:active:not(:disabled) {
+  box-shadow: inset 2px 2px 4px #d1d5d2, 
+              inset -2px -2px 4px #ffffff;
+  transform: translateY(2px);
+}
+
+.actionBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorBanner {
+  font-size: 0.85rem;
+  color: #d32f2f;
+  background: rgba(211, 47, 47, 0.05);
+  border: 1px dashed rgba(211, 47, 47, 0.2);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.backLink {
+  font-size: 0.85rem;
+  color: #728178;
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.backLink:hover {
+  color: #038B45;
+}
