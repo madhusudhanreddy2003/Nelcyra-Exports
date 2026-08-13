@@ -245,7 +245,7 @@ export default function Navbar() {
   By submitting this procurement request, you acknowledge our{' '}
   <Link href="/shipping-return-policy" target="_blank" style={{ color: '#038B45', textDecoration: 'underline', fontWeight: '500' }}>
     Shipping, Return & Refund Policy
-  </Link>.
+  </Link>
 </p>
               </div>
             </div>

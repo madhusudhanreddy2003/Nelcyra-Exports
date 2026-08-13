@@ -77,6 +77,8 @@ export default function Footer() {
             <li className={styles.linkItem}><Link href="/gallery">Gallery</Link></li>
             <li className={styles.linkItem}><Link href="/contact-us">Contact Us</Link></li>
             <li className={styles.linkItem}><Link href="/shipping-return-policy">Shipping & Return Policy</Link></li>
+            <li className={styles.linkItem}><Link href="/track">Track Your Order</Link></li>
+            <li className={styles.linkItem}><Link href="/admin">Admin Login</Link></li>
           </ul>
         </div>
 

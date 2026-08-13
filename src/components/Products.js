@@ -1,37 +1,72 @@
 // src/components/Products.js
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
-import { Plus } from 'lucide-react'; // Premium minimal icon path
+import { Plus } from 'lucide-react'; 
+import { db } from '../lib/firebase';
+import { collection, onSnapshot } from 'firebase/firestore';
 import styles from '../styles/Products.module.css';
 
 export default function Products() {
   const router = useRouter();
   const { addToCart, setCartOpen } = useCart();
   const [activeCategory, setActiveCategory] = useState('All');
+  
+  const [dbProducts, setDbProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const productData = [
-    { id: 'sp1', name: 'Green Cardamom', category: 'Spices', origin: 'Grown in Kerala, IND', img: '/products/cardamom.jpg' },
-    { id: 'sp2', name: 'Black Pepper', category: 'Spices', origin: 'Grown in Kerala, IND', img: '/products/black-pepper.jpg' },
-    { id: 'sp3', name: 'Clove', category: 'Spices', origin: 'Grown in Tamil Nadu, IND', img: '/products/Cloves.jpg' },
-    { id: 'sp4', name: 'Chillies', category: 'Spices', origin: 'Grown in Andhra Pradesh, IND', img: '/products/chilli.jpg' },
-    { id: 'sp5', name: 'Turmeric', category: 'Spices', origin: 'Grown in Nizamabad, IND', img: '/products/turmeric-2.jpg' },
-    { id: 'ag1', name: 'Banana', category: 'Agri Products', origin: 'Grown in Gujarat, IND', img: '/products/banana-3.jpg' },
-    { id: 'ag2', name: 'Coconut', category: 'Agri Products', origin: 'Grown in Karnataka, IND', img: '/products/coconut.jpg' },
-    { id: 'ag3', name: 'Coffee Bean', category: 'Agri Products', origin: 'Grown in Wayanad, IND', img: '/products/coffee.jpg' },
-    { id: 'ag4', name: 'Organic Jaggery', category: 'Agri Products', origin: 'Grown in Maharashtra, IND', img: '/products/organic-jaggery.jpg' },
-    { id: 'ag5', name: 'Fruit & Vegetables', category: 'Agri Products', origin: 'Grown in Various Origins, IND', img: '/products/fruits-vegetables.jpg' }
-  ];
+  // --- LIVE FIRESTORE DATABASE LISTENER ---
+  useEffect(() => {
+    const productsRef = collection(db, 'products');
+
+    const unsubscribe = onSnapshot(productsRef, (snapshot) => {
+      if (!snapshot.empty) {
+        const fetchedProducts = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const resolvedImg = data.imageUrl || data.image || data.img || '/products/cardamom.jpg';
+          
+          // Use admin's sourcingFrom or fallback origin text
+          const originLocation = data.sourcingFrom || data.origin || 'Various Origins, IND';
+
+          return {
+            id: doc.id,
+            name: data.name || data.productDesignation || 'Export Product',
+            category: data.category || data.categoryClass || 'Agri Products',
+            origin: originLocation.toLowerCase().startsWith('grown in') 
+              ? originLocation 
+              : `Grown in ${originLocation}`,
+            img: resolvedImg,
+            value: data.value || data.assetValuation || ''
+          };
+        });
+        setDbProducts(fetchedProducts);
+      } else {
+        setDbProducts([]);
+      }
+      setLoading(false);
+    }, (error) => {
+      console.error("Firestore public catalog subscription dropped:", error);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const availableCategories = useMemo(() => {
+    const categories = new Set(['All', 'Agri Products', 'Spices']);
+    dbProducts.forEach(p => {
+      if (p.category) categories.add(p.category);
+    });
+    return Array.from(categories);
+  }, [dbProducts]);
 
   const filteredProducts = activeCategory === 'All' 
-    ? productData 
-    : productData.filter(item => item.category === activeCategory);
+    ? dbProducts 
+    : dbProducts.filter(item => item.category === activeCategory);
 
-  // Handles immediate redirect pipeline for bulk orders
   const handleBuyNow = (product) => {
     addToCart({
       id: product.id,
@@ -40,7 +75,7 @@ export default function Products() {
       quantity: '', 
       img: product.img
     });
-    router.push('/shipping-details'); // Smooth programmatic route change
+    router.push('/shipping-details');
   };
 
   return (
@@ -49,7 +84,7 @@ export default function Products() {
       <div className={styles.sectionHeader}>
         <h2 className={styles.title}>Our Products</h2>
         <div className={styles.filterRow}>
-          {['All', 'Agri Products', 'Spices'].map((category) => (
+          {availableCategories.map((category) => (
             <button
               key={category}
               className={`${styles.filterBtn} ${activeCategory === category ? styles.filterBtnActive : ''}`}
@@ -62,65 +97,74 @@ export default function Products() {
       </div>
 
       <div className={styles.productsGrid}>
-        {filteredProducts.map((product) => (
-          <div key={product.id} className={styles.card}>
-            
-          <div className={styles.imageBox}>
-            <Image 
-              src={product.img} 
-              alt={product.name} 
-              fill /* Forces image to scale completely out to the container limits */
-              className={styles.productImg}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={product.id === 'sp1' || product.id === 'sp2'}
-            />
+        {loading ? (
+          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '48px 0', color: '#617568' }}>
+            Loading Live Export Catalog...
           </div>
-
-          
-
-            <div className={styles.metaContainer}>
-              <div className={styles.infoRow}>
-                <div className={styles.nameBlock}>
-                  <span className={styles.productName}>{product.name}</span>
-                  <Link href={`/products/${product.id}`} className={styles.viewMore}>
-                    view details
-                  </Link>
-                </div>
-                
-                {/* Premium Layout Actions Flex */}
-                <div className={styles.actionCluster}>
-                  {/* Plus Icon Action Button for Quick Addition */}
-                  <button 
-                    className={styles.iconAddBtn}
-                    title="Add to Cart"
-                    onClick={() => {
-                      addToCart({
-                        id: product.id,
-                        name: product.name,
-                        category: product.category,
-                        quantity: '',
-                        img: product.img
-                      });
-                      setCartOpen(true);
-                    }}
-                  >
-                    <Plus size={18} strokeWidth={2} />
-                  </button>
-
-                  {/* High-Tier Buy Now Action */}
-                  <button 
-                    className={styles.buyNowBtn}
-                    onClick={() => handleBuyNow(product)}
-                  >
-                    Buy Now
-                  </button>
-                </div>
+        ) : filteredProducts.length === 0 ? (
+          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '48px 0', color: '#617568' }}>
+            No products indexed under this category yet.
+          </div>
+        ) : (
+          filteredProducts.map((product) => (
+            <div key={product.id} className={styles.card}>
+              
+              {/* IMAGE FULLY FILLS CONTAINER */}
+              <div className={styles.imageBox} style={{ width: '100%', height: '260px', overflow: 'hidden', position: 'relative' }}>
+                <img 
+                  src={product.img} 
+                  alt={product.name} 
+                  className={styles.productImg}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  onError={(e) => {
+                    e.currentTarget.src = '/products/cardamom.jpg';
+                  }}
+                />
               </div>
-              <span className={styles.originText}>{product.origin}</span>
-            </div>
 
-          </div>
-        ))}
+              <div className={styles.metaContainer}>
+                <div className={styles.infoRow}>
+                  <div className={styles.nameBlock}>
+                    <span className={styles.productName}>{product.name}</span>
+                    <Link href={`/products/${product.id}`} className={styles.viewMore}>
+                      view details
+                    </Link>
+                  </div>
+                  
+                  <div className={styles.actionCluster}>
+                    <button 
+                      className={styles.iconAddBtn}
+                      title="Add to Cart"
+                      onClick={() => {
+                        addToCart({
+                          id: product.id,
+                          name: product.name,
+                          category: product.category,
+                          quantity: '',
+                          img: product.img
+                        });
+                        setCartOpen(true);
+                      }}
+                    >
+                      <Plus size={18} strokeWidth={2} />
+                    </button>
+
+                    <button 
+                      className={styles.buyNowBtn}
+                      onClick={() => handleBuyNow(product)}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+
+                {/* SOURCING FROM / GROWN IN ATTRIBUTE DISPLAY */}
+                <span className={styles.originText}>{product.origin}</span>
+              </div>
+
+            </div>
+          ))
+        )}
       </div>
 
     </section>
