@@ -1,638 +1,763 @@
-/* ==========================================================================
-   🌐 RESET & CORE ENGINE LAYOUT
-   ========================================================================== */
+/* src/styles/Admin.module.css */
+
+/* --- 🍎 APPLE MINIMALIST DESIGN SYSTEM & BASE STYLES --- */
 .dashboardContainer {
   display: flex;
   min-height: 100vh;
-  width: 100%;
-  background-color: #F8FAF9;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: #112217;
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(3, 139, 69, 0.02) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.03) 0px, transparent 50%);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  position: relative;
   overflow-x: hidden;
-  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 💻 Persistent Left Navigation Bar (Desktop Standard Mode) */
-.sidebar {
-  width: 280px;
-  background: #EAEFEF;
-  border-right: 1px solid #DFE5E4;
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  box-sizing: border-box;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 📱 High-Fidelity Mobile Sticky Header (Hidden on Desktops) */
+/* --- 📱 MOBILE TOP NAVBAR (FROSTED GLASS) --- */
 .mobileNavBar {
   display: none;
-  width: 100%;
-  height: 64px;
-  background: #EAEFEF;
-  border-bottom: 1px solid #DFE5E4;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 0 24px;
+  right: 0;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0 16px;
   align-items: center;
   justify-content: space-between;
-  z-index: 110;
-  box-sizing: border-box;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  z-index: 1000;
+}
+
+.mobileLogo h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #038b45;
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .menuToggleBtn {
-  background: #FFFFFF;
-  border: 1px solid #DFE5E4;
-  border-radius: 8px;
-  color: #062313;
-  cursor: pointer;
-  padding: 8px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: #0f172a;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.menuToggleBtn:hover {
-  background: #F4F6F5;
+.menuToggleBtn:active {
+  transform: scale(0.95);
+}
+
+.sidebarOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1050;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sidebarOverlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- 🏛️ SAAS SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: #ffffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  z-index: 1100;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .logoBlock {
-  margin-bottom: 36px;
+  margin-bottom: 24px;
+  padding-left: 8px;
 }
 
 .logoBlock h2 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #062313;
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #038b45;
   margin: 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .logoBlock span {
-  font-size: 0.72rem;
-  color: #516457;
-  font-weight: 700;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  font-weight: 500;
+  color: #94a3b8;
 }
 
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .navBtn, .activeNavBtn {
-  width: 100%;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #4A5E51;
-  background: transparent;
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border: 1px solid transparent;
   cursor: pointer;
-  box-sizing: border-box;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  background: transparent;
+  color: #475569;
 }
 
 .navBtn:hover {
-  background: rgba(6, 35, 19, 0.04);
-  color: #062313;
-  transform: translateX(2px);
+  background: rgba(0, 0, 0, 0.03);
+  color: #0f172a;
 }
 
 .activeNavBtn {
-  color: #062313;
-  background: #FFFFFF;
+  background: #f0fdf4;
+  color: #038b45;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(6, 35, 19, 0.03), 0 1px 2px rgba(6, 35, 19, 0.02);
 }
 
 .newExportBtn {
-  margin-top: auto;
-  margin-bottom: 24px;
-  width: 100%;
-  padding: 14px;
+  margin-top: 14px;
+  background: #038b45;
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
-  background: #062313;
-  color: #FFFFFF;
+  border-radius: 11px;
+  padding: 11px 16px;
+  font-size: 0.88rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-sizing: border-box;
+  cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(3, 139, 69, 0.2);
 }
 
 .newExportBtn:hover {
-  background: #0b3d22;
-  box-shadow: 0 4px 12px rgba(6, 35, 19, 0.15);
+  background: #027339;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(3, 139, 69, 0.28);
 }
 
 .adminProfileCard {
+  margin-top: 16px;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding-top: 20px;
-  border-top: 1px solid #DFE5E4;
-  box-sizing: border-box;
-  transition: opacity 0.2s ease;
+  gap: 10px;
+  transition: all 0.2s ease;
 }
 
 .adminProfileCard:hover {
-  opacity: 0.85;
+  background: #f1f5f9;
 }
 
 .profileAvatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #062313;
-  color: #FFFFFF;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #038b45;
+  color: #ffffff;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.9rem;
-  flex-shrink: 0;
+  font-size: 0.88rem;
 }
 
 .profileInfo h4 {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: #062313;
+  color: #0f172a;
 }
 
 .profileInfo p {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #617568;
+  margin: 1px 0 0 0;
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 400;
 }
 
-/* 🖥️ MAIN WORKSPACE CONTAINER ENGINE */
+/* --- 📊 WORKSPACE LAYOUT & MARGIN OFFSET --- */
 .workspace {
   flex: 1;
-  margin-left: 280px;
-  padding: 44px 48px;
-  min-height: 100vh;
-  width: calc(100% - 280px);
+  margin-left: 260px; /* Essential offset for the fixed sidebar */
+  padding: 32px 36px;
+  max-width: calc(100vw - 260px);
   box-sizing: border-box;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: appleFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-x: hidden;
 }
 
+@keyframes appleFadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 🔍 TOP ACTION BAR --- */
 .topActionBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 36px;
-  gap: 24px;
-  width: 100%;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .topActionBar h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #062313;
   margin: 0;
-  letter-spacing: -0.03em;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.filterScrollContainer {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 8px 2px;
+  margin-top: 10px;
+  max-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filterScrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.filterBarContainer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: visible !important; /* Allows floating menus to overlay cleanly */
+  z-index: 50;
 }
 
 .searchWrapper {
   position: relative;
-  width: 400px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.searchIcon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #7A8F82;
-  transition: color 0.2s ease;
+  min-width: 260px;
 }
 
 .searchInput {
   width: 100%;
-  padding: 12px 16px 12px 48px;
-  border: 1px solid #DFE5E4;
-  border-radius: 24px;
-  font-size: 0.92rem;
-  background: #FFFFFF;
+  padding: 10px 16px 10px 38px;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #0f172a;
   outline: none;
   box-sizing: border-box;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
   transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .searchInput:focus {
-  border-color: #062313;
-  box-shadow: 0 4px 12px rgba(6, 35, 19, 0.05);
+  border-color: #038b45;
+  box-shadow: 0 0 0 3px rgba(3, 139, 69, 0.1);
 }
 
-.searchInput:focus + .searchIcon {
-  color: #062313;
+.searchIcon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
 }
 
-/* ==========================================================================
-   📈 METRICS DISPLAY GRID SYSTEM
-   ========================================================================== */
+/* --- 📈 METRIC CARDS --- */
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 40px;
-  width: 100%;
-  box-sizing: border-box;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .metricCard {
-  background: #FFFFFF;
-  border: 1px solid #EBEFEF;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
-  padding: 24px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01), 0 1px 3px rgba(0, 0, 0, 0.01);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 20px 22px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
 }
 
 .metricCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(6, 35, 19, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
 }
 
 .metricHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #617568;
-  font-size: 0.78rem;
-  font-weight: 700;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
 .metricValue {
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: #062313;
-  margin-bottom: 6px;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #0f172a;
   letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 4px;
 }
 
 .metricSubtext {
-  font-size: 0.78rem;
-  color: #038B45;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* --- 📊 CHARTS SECTION --- */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.chartCard {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.chartTitle {
+  margin: 0 0 18px 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.barRow {
+  margin-bottom: 14px;
+}
+
+.barHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+.barTrack {
+  height: 7px;
+  background-color: #f1f5f9;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.donutWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 6px 0;
+}
+
+.donutSvg {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
+}
+
+.donutSegment {
+  fill: transparent;
+  stroke-width: 20;
+  transition: stroke-dasharray 0.6s ease;
+}
+
+.donutLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* --- 📄 CLEAN FLAT TABLES --- */
+.flatContainerCard {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.cardTop {
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cardTop h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.viewAllLink {
+  color: #038b45;
+  font-size: 0.82rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 4px;
-}
-
-/* ==========================================================================
-   ⚡ ASYMMETRIC OPERATIONAL LAYOUT & CARDS
-   ========================================================================== */
-.layoutSplit {
-  display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 32px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.flatContainerCard {
-  background: #FFFFFF;
-  border: 1px solid #EBEFEF;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden; /* Guards card borders from expanding wide layout children */
-}
-
-.cardTop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 28px;
-}
-
-.cardTop h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #062313;
-  margin: 0;
-  letter-spacing: -0.02em;
-}
-
-.viewAllLink {
-  font-size: 0.88rem;
-  color: #038B45;
-  font-weight: 700;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: gap 0.2s ease;
 }
 
-.viewAllLink:hover {
-  gap: 8px;
-}
-
-/* ==========================================================================
-   📋 DATA LEDGER ENQUIRIES TABLE SYSTEM
-   ========================================================================== */
 .tableResponsiveWrapper {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  display: block;
 }
 
 .flatTable {
   width: 100%;
+  min-width: 700px;
   border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
 }
 
 .flatTable th {
-  text-align: left;
-  padding: 14px 18px;
-  font-size: 0.78rem;
-  font-weight: 700;
+  background: #fafcfa;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #617568;
-  border-bottom: 2px solid #F0F4F2;
-  letter-spacing: 0.03em;
-}
-
-.flatTable tr {
-  transition: background-color 0.15s ease;
-}
-
-.flatTable tbody tr:hover {
-  background-color: #F8FAF9;
+  letter-spacing: 0.05em;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
 }
 
 .flatTable td {
-  padding: 18px;
-  font-size: 0.92rem;
-  color: #2E3F35;
-  border-bottom: 1px solid #F0F4F2;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  color: #334155;
+  font-weight: 400;
+  vertical-align: middle;
 }
 
-/* Workflow Badges */
+.flatTable tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* --- 🏷️ STATUS BADGES --- */
 .badgeFlat {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
   display: inline-block;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.new { background: #E8F5EE; color: #08703B; }
-.inprogress { background: #EAF3FA; color: #16609C; }
-.pending { background: #FFF9E6; color: #9C7616; }
-.highpriority { background: #FDECEB; color: #9C2216; }
-
-/* ==========================================================================
-   🚚 LIVE PROGRESS SHIPMENT SCROLL TILES
-   ========================================================================== */
-.shipmentsScrollWrapper {
-  width: 100%;
+.new {
+  background-color: #f0fdf4;
+  color: #166534;
 }
 
-.shipmentsFlexContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
+.inprogress {
+  background-color: #eff6ff;
+  color: #1e40af;
 }
 
-.shipmentItemCard {
-  background: #F8FAF9;
-  border: 1px solid #EBEFEF;
-  border-radius: 12px;
-  padding: 20px;
-  box-sizing: border-box;
-  transition: transform 0.2s ease;
+.pending {
+  background-color: #fffbeb;
+  color: #92400e;
 }
 
-.shipmentItemCard:hover {
-  transform: scale(1.01);
+.highpriority {
+  background-color: #fef2f2;
+  color: #991b1b;
 }
 
-.shipmentHeader {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.92rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+.delivered, .converted {
+  background-color: #f0fdf4;
+  color: #15803d;
 }
 
 .sliderContainer {
-  height: 8px;
-  background: #E2E8E6;
-  border-radius: 4px;
-  margin: 16px 0;
-  overflow: hidden;
+  position: relative;
 }
 
 .sliderFill {
-  height: 100%;
-  background: linear-gradient(90deg, #062313, #0b4a27);
-  border-radius: 4px;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 100px;
 }
 
-.sliderMetrics {
+/* --- 💎 PREMIUM SAAS CUSTOM DROPDOWN --- */
+.customDropdownContainer {
+  position: relative;
+  display: inline-block;
+  z-index: 100;
+}
+
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 7px 13px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #0f172a;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.dropdownTrigger:hover {
+  background: #f8fafc;
+  border-color: rgba(3, 139, 69, 0.3);
+  box-shadow: 0 2px 6px rgba(3, 139, 69, 0.06);
+}
+
+.dropdownTriggerActive {
+  border-color: #038b45;
+  box-shadow: 0 0 0 3px rgba(3, 139, 69, 0.1);
+  background: #ffffff;
+}
+
+.dropdownChevron {
+  color: #64748b;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdownChevronOpen {
+  transform: rotate(180deg);
+  color: #038b45;
+}
+
+/* Floating Popover Menu */
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 200px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 5px;
+  box-shadow: 
+    0 10px 28px -4px rgba(15, 23, 42, 0.14),
+    0 3px 10px rgba(0, 0, 0, 0.05);
+  z-index: 99999 !important;
+  animation: dropdownPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@keyframes dropdownPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 0.78rem;
-  color: #617568;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.dropdownItem:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.dropdownItemActive {
+  background: #f0fdf4;
+  color: #038b45;
   font-weight: 500;
 }
 
-/* Mobile Sidebar Drawer Shade Mask */
-.sidebarOverlay {
-  display: none;
-  position: fixed;
-  top: 0; 
-  left: 0; 
-  width: 100vw; 
-  height: 100vh;
-  background: rgba(6, 35, 19, 0.3);
-  backdrop-filter: blur(4px);
-  z-index: 95;
-  animation: fadeIn 0.2s ease forwards;
+.dropdownItemActive:hover {
+  background: #e6f9ed;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; } to { opacity: 1; }
+.dropdownCheckIcon {
+  color: #038b45;
 }
 
 /* ==========================================================================
-   ⚡ TARGETED SCREEN RESOLUTION RESPONSIVE OVERRIDES
+   📱 RESPONSIVE BREAKPOINTS (TABLETS & PHONES)
    ========================================================================== */
 
 @media (max-width: 1200px) {
-  .workspace {
-    padding: 40px 32px;
-  }
   .metricsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
   }
-}
-
-@media (max-width: 992px) {
-  .layoutSplit {
+  .chartsGrid {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .mobileNavBar {
     display: flex;
   }
-
-  /* Structural side pane modifications for mobile slide-out drawer */
-  .sidebar {
-    transform: translateX(-100%);
-    top: 64px;
-    height: calc(100vh - 64px);
-    width: 290px;
-    background: #EAEFEF;
-    padding: 28px 24px;
-    box-shadow: 12px 0 30px rgba(6, 35, 19, 0.08);
-  }
-
-  .sidebarOpen {
-    transform: translateX(0) !important;
-  }
-
-  .sidebarOverlayVisible {
+  .sidebarOverlay {
     display: block;
   }
-
-  .logoBlock {
-    display: none;
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
   }
-
-  .newExportBtn {
-    margin-top: 32px;
+  .sidebarOpen {
+    transform: translateX(0);
   }
-
-  /* 🚨 HARD FIX: Global page bleed protection */
   .workspace {
-    margin-left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 88px 16px 40px 16px !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden; /* Absolute shield pinning view content inside view frame */
+    margin-left: 0;
+    max-width: 100vw;
+    width: 100vw;
+    padding: 72px 14px 40px 14px;
   }
-
   .topActionBar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 24px;
-    width: 100%;
+    align-items: stretch;
+    gap: 12px;
   }
-
+  .topActionBar h1 {
+    font-size: 1.4rem;
+  }
   .searchWrapper {
     width: 100%;
+    min-width: 0;
   }
-
-  .metricsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    width: 100%;
-  }
-
-  /* 🚨 HARD FIX: Complete inner bounding constraints */
-  .layoutSplit {
-    grid-template-columns: 1fr !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .flatContainerCard {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 24px 16px !important;
-    box-sizing: border-box !important;
-    overflow: hidden; /* Locks children from pushing container boundaries outward */
-  }
-
-  /* 📋 Enforces Touch-Swipe Horizontal Axis to Table Rows */
-  .tableResponsiveWrapper {
-    width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    display: block;
-  }
-
-  .flatTable {
-    min-width: 650px !important; /* Preserves desktop-proportioned layout logic, generating clean swipe zone */
-  }
-
-  /* 🚚 Transforms Live Progress Blocks into Horizontal Ribbon Track */
-  .shipmentsScrollWrapper {
-    width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 12px;
-    display: block;
-  }
-
-  .shipmentsFlexContainer {
-    display: flex !important;
-    flex-direction: row !important; /* Locks structural row path alignment side-by-side */
-    flex-wrap: nowrap !important;
-    width: max-content !important;
-    gap: 14px;
-  }
-
-  .shipmentItemCard {
-    width: 280px !important; /* Fixes block structures uniformly inside row array loops */
-    flex-shrink: 0 !important;
-    margin-bottom: 0 !important;
-  }
-}
-
-@media (max-width: 480px) {
   .metricsGrid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
-  
-  .workspace {
-    padding: 88px 12px 32px 12px !important;
+  .metricCard {
+    padding: 16px 18px;
+  }
+  .chartCard {
+    padding: 18px;
   }
 }
